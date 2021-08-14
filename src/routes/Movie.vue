@@ -23,7 +23,9 @@
       <div
         :style="{backgroundImage: `url(${requestDiffSizeImage(theMovie.Poster)})`}"
         class="poster">
-        <Loader absolute />
+        <Loader
+          v-if="imageLoading"
+          absolute />
       </div>
       <div class="specs">
         <div class="title">
@@ -96,6 +98,7 @@ export default {
       'searchMovieWithId'
     ]),
     requestDiffSizeImage(url) {
+      console.log(this.imageLoading);
       if (!url || url === 'N/A') {
         this.imageLoading = false;
         return '';
@@ -103,6 +106,7 @@ export default {
 
       const src = url.replace('SX300', 'SX700');
       this.$loadImage(src).then(() => {
+        console.log((this.imageLoading));
         this.imageLoading = false;
       });
       return src;
