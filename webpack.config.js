@@ -1,7 +1,8 @@
 const path = require('path');
 const HtmlPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
-const { VueLoaderPlugin } = require('vue-loader');
+const {VueLoaderPlugin} = require('vue-loader');
+const DotEnv = require('dotenv-webpack');
 
 module.exports = {
   resolve: {
@@ -52,8 +53,12 @@ module.exports = {
       template: './index.html',
     }),
     new CopyPlugin({
-      patterns: [{ from: 'static' }],
+      patterns: [{from: 'static'}],
     }),
     new VueLoaderPlugin(),
+    new DotEnv()
   ],
+  devServer: {
+    port: 8079
+  }
 };

@@ -19,7 +19,7 @@ export default {
   },
   actions: {
     async searchMovies({state, commit}, payload) {
-      if(state.loading) return
+      if (state.loading) return
 
       commit('updateState', {
         loading: true,
@@ -40,29 +40,29 @@ export default {
         const datasCount = total >= payload.number ? payload.number : total;
 
         let page = 2;
-        
-        while(state.movies.length < datasCount) {
+
+        while (state.movies.length < datasCount) {
           const res = await _fetchMovie({...payload, page});
           const {Search} = res.data;
           commit('updateState', {
             movies: _uniqBy([
               ...state.movies,
               ...Search
-            ], 'imdbID') 
+            ], 'imdbID')
           })
           console.log('while문');
           console.log(state.movies)
           page += 1;
         }
 
-        if(state.movies.length > datasCount) {
+        if (state.movies.length > datasCount) {
           commit('updateState', {
             movies: [...state.movies.slice(0, datasCount)]
           });
           console.log('if문');
           console.log(state.movies);
         }
-      } catch(e) {
+      } catch (e) {
         console.log(e);
         commit('updateState', {
           message: e.message,
@@ -70,13 +70,13 @@ export default {
         })
       } finally {
         commit('updateState', {
-          loading : false
+          loading: false
         })
       }
-      
+
     },
     async searchMovieWithId({state, commit}, payload) {
-      if(state.loading) return
+      if (state.loading) return
 
       commit('updateState', {
         loading: true
@@ -104,9 +104,5 @@ export default {
 }
 
 async function _fetchMovie(payload) {
-  const {title, type, page = 1, year, id} = payload;
-  const url = id
-  ? `https://www.omdbapi.com/?apikey=7035c60c&i=${id}&plot=full`
-  : `https://www.omdbapi.com/?apikey=7035c60c&s=${title}&type=${type}&y=${year}&page=${page}`;
-  return await axios.get(url);
+  return await axios.post('/.netlify/functions/movie', payload);
 }

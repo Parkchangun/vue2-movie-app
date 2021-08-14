@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --mode development",
-    "dev:netlify": "netlify",
+    "dev:netlify": "netlify dev",
     "build": "webpack --mode production",
     "lint": "eslint --ext .js,.vue",
     "lint:fix": "eslint --fix --ext .js,.vue"
@@ -25,6 +25,7 @@
     "babel-loader": "^8.2.2",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^6.2.0",
+    "dotenv-webpack": "^7.0.3",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^7.15.0",
     "file-loader": "^6.2.0",

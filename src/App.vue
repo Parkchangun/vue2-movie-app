@@ -7,19 +7,15 @@
 </template>
 
 <script>
+
 import Header from '@/components/Header';
-import Footer from '@/components/Footer'
-import chan from 'npm-test';
+import Footer from '@/components/Footer';
 
 export default {
   components: {
     Header,
     Footer
   },
-  mounted() {
-    const arr = chan(['A', 'B', 'C', 'A', 'B']);
-    console.log(arr);
-  }
 };
 </script>
 
