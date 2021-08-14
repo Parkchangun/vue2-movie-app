@@ -20,6 +20,7 @@
     <div
       v-else
       class="movie-details">
+      <!-- 이미지 스프라이트를 통해 $loadImage와 같은 이미지 사용 -->
       <div
         :style="{backgroundImage: `url(${requestDiffSizeImage(theMovie.Poster)})`}"
         class="poster">
@@ -79,10 +80,10 @@ export default {
   },
   data() {
     return {
-      imageLoading: true,
+      imageLoading: true
     }
   },
-  mounted() {
+  created() {
     this.searchMovieWithId({
       id: this.$route.params.id
     })
@@ -98,7 +99,6 @@ export default {
       'searchMovieWithId'
     ]),
     requestDiffSizeImage(url) {
-      console.log(this.imageLoading);
       if (!url || url === 'N/A') {
         this.imageLoading = false;
         return '';
@@ -106,9 +106,9 @@ export default {
 
       const src = url.replace('SX300', 'SX700');
       this.$loadImage(src).then(() => {
-        console.log((this.imageLoading));
         this.imageLoading = false;
       });
+      console.log('return')
       return src;
     }
   }

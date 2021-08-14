@@ -76,7 +76,7 @@ export default {
 
     },
     async searchMovieWithId({state, commit}, payload) {
-      if (state.loading) return
+      if (state.loading) return;
 
       commit('updateState', {
         loading: true
